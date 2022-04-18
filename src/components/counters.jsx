@@ -3,16 +3,11 @@ import Counter from './counter';
 
 class Counters extends Component {
 
-    state = {
-        counters : [
-            {id : 1 , value : 0},
-            {id : 2 , value : 0},
-            {id : 3 , value : 0},
-            {id : 4 , value : 0}
-        ]
-    };
-    
+
     render() { 
+        console.log('Counters-rendered')
+        const {onReset , counters , onDelete , onIncrement , onDecrement , onAddItem} = this.props;
+
         return (
             <div>
                 {/* Here we use counter components */}
@@ -21,8 +16,26 @@ class Counters extends Component {
                 <Counter />
                 <Counter /> */}
 
-                {this.state.counters.map(counter => 
-                    <Counter key = {counter.id} value = {counter.value} selected = {true}>
+                <button 
+                    className='btn btn-sm btn-primary m-2'
+                    onClick={onReset}>
+                    Reset
+                </button>
+
+                <button
+                    className='btn btn-sm btn-primary m-2'
+                    onClick={onAddItem}>
+                    Add Item
+                </button>
+
+                {counters.map(counter => 
+                    <Counter 
+                        key = {counter.id} 
+                        counter = {counter}
+                        onDelete = {onDelete}
+                        onIncrement = {onIncrement}
+                        onDecrement = {onDecrement}>
+
                         <h4>Counter #{counter.id}</h4>
                     </Counter>)}
 
